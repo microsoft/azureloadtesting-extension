@@ -53,7 +53,7 @@ You can generate a Locust script from any existing Postman collection, Insomnia 
 
     **Tip:** Using a **Postman collection**, **Insomnia collection** or **.http file** is recommended, as it allows Copilot to extract multiple API operations, request data, and authentication details—creating a more realistic load test.  
 
-1. Select the sample file which you saved earlier to your workspace: [**`petstore-sample.http`**](https:aka.ms/malt-vscode/http-sample). 
+1. Select the sample file which you saved earlier to your workspace: [**`petstore-sample.http`**](https://aka.ms/malt-vscode/http-sample). 
 
 1. Copilot will analyze the selected file and generate a **Locust-based load test script**, automatically:
     - Sequencing API requests to simulate real-world usage.  
