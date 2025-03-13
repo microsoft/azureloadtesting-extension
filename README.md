@@ -41,7 +41,7 @@ You can also access the features directly from the command palette by using the 
 
 You can generate a Locust script from any existing Postman collection, Insomnia collection, or .http file. If the file contains multiple requests, Copilot will attempt to sequence them into a cohesive scenario. 
 
-1. For this quickstart, download and save the [sample PetStore .http file](https:aka.ms/malt-vscode/http-sample) in your current VS Code workspace.
+1. For this quickstart, download and save the [sample PetStore .http file](https://aka.ms/malt-vscode/http-sample) in your current VS Code workspace.
 
 1. Click the **Create a Load Test** button in the walkthrough, or run **Load Testing: Create Locust test** from the command palette.
 
