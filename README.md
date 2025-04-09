@@ -24,8 +24,6 @@ Before you begin, make sure you have the following:
 
 **Tip:** VS Code's GitHub Copilot Chat offers multiple AI models. You can switch models using the model picker in the chat input field. If you're unsure which one to use, we recommend GPT-4o.
 
-If you’d like to run the HTTP file, you can install the [httpYac - Rest Client extension](https://marketplace.visualstudio.com/items?itemName=anweber.vscode-httpyac). However, this step is optional and not required for this quickstart.
-
 ### Open the Walkthrough  
 
 To get started, open the command palette in VS Code and run: **Load Testing: Open Walkthrough**. This walkthrough provides the key entry points of the extension. 
@@ -41,19 +39,15 @@ You can also access the features directly from the command palette by using the 
 
 You can generate a Locust script from any existing Postman collection, Insomnia collection, or .http file. If the file contains multiple requests, Copilot will attempt to sequence them into a cohesive scenario. 
 
-1. For this quickstart, download and save the [sample PetStore .http file](https:aka.ms/malt-vscode/http-sample) in your current VS Code workspace.
-
 1. Click the **Create a Load Test** button in the walkthrough, or run **Load Testing: Create Locust test** from the command palette.
 
-1. Choose how you want to generate your test script:
-    - Import a Postman collection
-    - Import a Insomnia collection
-    - Import an .http file
-    - Simple HTTP request - If you don’t have a Postman collection or HTTP file, select **Simple HTTP request...** and enter a website URL.  
+1. You can choose the source to auto-generate a Locust test script:
+    - Selecting a **Postman collection**, **Insomnia collection**, or **.http file** lets Copilot extract multiple API operations, request data, and authentication details—creating a more complete and realistic load test.
+    - Choosing **Single URL** allows you to enter a single endpoint URL, generating a simple script you can customize or expand.
 
-    **Tip:** Using a **Postman collection**, **Insomnia collection** or **.http file** is recommended, as it allows Copilot to extract multiple API operations, request data, and authentication details—creating a more realistic load test.  
+![image](https://github.com/user-attachments/assets/05739217-2647-461c-a00b-83c57cfe5e88)
 
-1. Select the sample file which you saved earlier to your workspace: [**`petstore-sample.http`**](https:aka.ms/malt-vscode/http-sample). 
+1. **For this walkthrough**, you can select **Try Sample: Pet Shop API**, which uses the [**`petstore-sample.http`**](https://aka.ms/malt-vscode/http-sample) file to generate a sample Locust test script. 
 
 1. Copilot will analyze the selected file and generate a **Locust-based load test script**, automatically:
     - Sequencing API requests to simulate real-world usage.  
