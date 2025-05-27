@@ -1,17 +1,79 @@
 # Azure Load Testing for Visual Studio Code
-Use the Azure Load Testing extension to easily create Locust load tests using Copilot, iterate locally, and scale effortlessly in Azure. Whether you're new to Locust or a performance testing expert, the Azure Load Testing extension streamlines test creation, iteration, and scaling—right from your VS Code environment. [Get the extension in Visual Studio Marketplace](https://aka.ms/malt-vscode/get).
+The Azure Load Testing extension makes it easy to create and run Locust-based load tests using GitHub Copilot—all within VS Code. Iterate locally, then scale effortlessly in Azure. Whether you're new to Locust or a performance testing expert, this extension streamlines test creation, iteration, and scaling in the cloud.
 
-You can use this repository to:
-- Upvote a feature or request a new one.
-- Search for potential work-arounds to problems you’re having.
-- Provide feedback on using the Azure Load Testing extension.
+**New! Azure Load Testing now supports GitHub Copilot Agent Mode!**
 
-## Get Started
-This quickstart guides you through generating, refining, and executing realistic load tests. 
+## Get Started with Agent Mode
+
+### Load Test an Endpoint
+
+Open the **Copilot Chat** window and ensure **Agent Mode** is enabled. 
+
+Then type a prompt like:
+
+`Run a load test in Azure for https://example.com`
+
+![alt text](media/agent-mode-create-script-for-endpoint.png)
+
+Copilot Agent will use multiple MCP tools provided by the Azure Load Testing extension to:
+1. Create a Locust test script.
+2. Help you select or create an Azure Load Testing resource (you'll be prompted to sign in and pick an Azure subscription).
+3. Run the load test in Azure. 
+    - A `load.config.yaml` file is created for easy reuse.
+    - If your app is hosted in Azure, you'll be prompted to enable optional server-side metrics for deeper test insights.
+
+Once the load test starts, you can view detailed results and live metrics in the Azure portal.
+
+![alt text](media/agent-mode-create-and-run-load-test.png)
+
+
+### Fetch Insights and Implement Suggestions with Copilot
+
+Azure Load Testing now generates **AI-driven insights** for each test run. These insights and recommendations can be retrieved directly in VS Code. 
+
+After your test completes, try prompting Copilot:
+
+`Fetch insights from my Azure load test run`
+
+Copilot will summarize key findings and may suggest optimizations. You can then ask Copilot to help implement any recommended changes. 
+
+**Tip:** To retrieve insights from a previous run, prompt: 
+
+`Fetch insights from another test run`
+
+VS Code will display a list of past test runs to choose from. 
+
+### Create Realistic Load Tests from HTTP files or API Collections
+
+The extension supports generating Locust test scripts from a variety of inputs—including HTTP files, Postman collections, and Insomnia collections. This enables Copilot to build rich test scenarios with real API calls, request data, and auth details.
+    
+#### From an HTTP file
+If you have a file named `myrequests.http` in your VS Code workspace, try: 
+
+`Create a load test script based on the http file myrequests.http`
+
+#### From a Postman Collection
+For a file like `myapi.postman_collection.json`:
+
+`Create a load test script based on the Postman collection myapi.postman_collection.json`
+
+#### From an Insomnia Collection
+For a file like `myapi.insomnia_collection.json`:
+
+`Create a load test script based on the Insomnia collection myapi.insomnia_collection.json`
+
+#### From a URL
+Don't have any files? You can still start with a simple input:
+
+`Create a load test script for the endpoint https://example.com`
+
+
+## Get Started with Ask Mode
+This tutorial guides you through generating, refining, and executing realistic load tests. 
 
 By the end, you'll have a fully functional load test script generated from a **Postman collection**, **Insomnia collection**, or **.http file**, enhanced with Copilot-powered improvements, and ready to scale in **Azure Load Testing**.
 
-![Create Locust test scripts](media/create-locust-test.gif)
+![Create Locust test scripts with Ask mode](media/create-locust-test.gif)
 
 ### Prerequisites
 
@@ -44,8 +106,6 @@ You can generate a Locust script from any existing Postman collection, Insomnia 
 1. You can choose the source to auto-generate a Locust test script:
     - Selecting a **Postman collection**, **Insomnia collection**, or **.http file** lets Copilot extract multiple API operations, request data, and authentication details—creating a more complete and realistic load test.
     - Choosing **Single URL** allows you to enter a single endpoint URL, generating a simple script you can customize or expand.
-
-![image](https://github.com/user-attachments/assets/05739217-2647-461c-a00b-83c57cfe5e88)
 
 1. **For this walkthrough**, you can select **Try Sample: Pet Shop API**, which uses the [**`petstore-sample.http`**](https://aka.ms/malt-vscode/http-sample) file to generate a sample Locust test script. 
 
@@ -94,10 +154,10 @@ payload = {
 ### Run the Load Test
 
 You can execute your load test in two ways:
-- Run locally for quick validation
-- Run in Azure Load Testing for high-scale, multi-region load
+- [Run locally](#run-locally-for-quick-validation) for quick validation
+- [Run in Azure Load Testing](#scale-up-in-azure-load-testing) for high-scale, multi-region load
 
-#### Run Locally for Quick Validation
+### Run Locally for Quick Validation
 To quickly validate your test, run it locally using Locust from **Visual Studio Code**:
 1. Open the command palette and run: **Load Testing: Run load test (local)**. 
 1. This will automatically launch the **Locust web UI** in a browser. It can take a few seconds for the Locust server to be ready and for the browser to open. 
@@ -121,7 +181,7 @@ If you prefer running the test from a **VS Code Terminal**:
     * `--run-time 1m` → Runs the test for 1 minute.
 3. Open a browser to `http://0.0.0.0:8089` to view the Locust web UI.
 
-#### Scale Up in Azure Load Testing
+### Scale Up in Azure Load Testing
 For high-load scenarios where you need to simulate many thousands of concurrent virtual users across multiple regions, you can run your test in **Azure Load Testing**.  
 
 To execute a large-scale test:  
@@ -145,10 +205,10 @@ Tip: To quickly access test results from previous runs, use the command: **Load 
 ![Azure Load Testing report](media/run-load-test-azure.gif)
 
 
-### Next Steps
+## Next Steps
 So far in this quickstart, sensitive variables like `API_KEY` were stored in a `.env` file and uploaded to the cloud service. However, as a best practice, secrets should be securely managed in **Azure Key Vault**. The extension provides guidance on setting this up.
 
-#### Secure Secrets with Azure Key Vault
+### Secure Secrets with Azure Key Vault
 1. Open the **Copilot Chat** window, type `@testing /setupLoadTestSecretsInAzure` and hit Enter.
 1. Copilot will guide you through:
     - Creating an Azure Key Vault.
@@ -159,3 +219,13 @@ So far in this quickstart, sensitive variables like `API_KEY` were stored in a `
 Whenever you modify your Locust script or YAML configuration, you can re-run the test by executing **Run load test (Azure Load Testing)**.
 
 For more information, visit the [Azure Load Testing documentation](https://learn.microsoft.com/azure/load-testing/).
+
+## Privacy and preview terms
+By using the Azure Load Testing extension for VS Code, you agree to the [Microsoft Azure Load Testing Extension for Visual Studio Code Preview terms](https://aka.ms/malt-vscode/license). Review the [transparency note](https://aka.ms/malt-vscode/transparency) to understand about usage, limitations, and ways to improve Copilot Chat during the technical preview.
+
+Your code is yours. We follow responsible practices in accordance with our [Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement) to ensure that your code snippets will not be used as suggested code for other users of GitHub Copilot.
+
+To get up-to-date security fixes, use the latest version of the Copilot extension and Visual Studio Code.
+
+## Telemetry
+Visual Studio Code collects usage data and sends it to Microsoft to help improve our products and services. Read the [Microsoft Privacy Statement](https://www.microsoft.com/privacy/privacystatement) to learn more. If you don't want to send usage data to Microsoft, you can set the telemetry.enableTelemetry setting to false. Get more information in the [FAQ section](https://code.visualstudio.com/docs/supporting/faq#_how-to-disable-telemetry-reporting).
